@@ -20,14 +20,11 @@ const salesSchema = z.object({
 export const salesRouter = router({
   list: publicProcedure
   .meta({ openapi: { method: 'GET', path: '/sales'}})
-  .input( z.object({
-    name: z.string()
-  }))
+  .input( z.void())
   .output(z.object({sales: z.array(salesSchema)}))
 
   .query( async ({ ctx }) => {
 
-    console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ')
     // const result = await ctx.prisma.viewSales.findFirst()
     const result = await ctx.prisma.viewSales.findMany()
     
