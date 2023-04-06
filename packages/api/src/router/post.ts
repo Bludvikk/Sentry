@@ -14,7 +14,7 @@ const salesSchema = z.object({
   tranDate: z.date(),
   payment: z.object({
     code: z.string().default('N/A'),
-    amount: z.number().default(0)}).optional()
+    amount: z.number().default(0)})
 })
 
 
@@ -64,34 +64,24 @@ export const salesRouter = router({
   create: publicProcedure
     .meta({ openapi: { method: 'POST', path: '/sales'}})
     .input(
-      z.object({
-        grossSales: z.number(),
-        locationCode: z.string(),
-        netSales: z.number(),
-        profitTotal: z.number(),
-        returnTotal: z.number(),
-        tranDate: z.date(),
-        voidTotal: z.number(),
-        payment: z.object({
-          code: z.string().default('N/A'),
-          amount: z.number().default(0),
-        })
-      }),
+     salesSchema
     ).output(
       z.object({
-        name: z.string()
+        message: z.string()
       })
     )
     .mutation( async ({ ctx, input }) => {
-      const { grossSales, locationCode, netSales, profitTotal, returnTotal, tranDate, voidTotal, payment } = input;
-      await ctx.prisma.viewSales.create({ data:  {
-        grossSales, locationCode, netSales, profitTotal, returnTotal, tranDate, voidTotal, payment
-      }
-      }
+      try {
+        const {} = input;
+      await ctx.prisma.viewSales.create({ data: input }
       );
       return {
-        name: 'Success'
+        message: 'Success'
       }
+      } catch (error) {
+        throw new TRPCError({message: 'Cannot post Sales Record', code: 'BAD_REQUEST'})
+      }
+      
     }),
   delete: publicProcedure.input(z.string()).mutation(({ ctx, input }) => {
     return ctx.prisma.viewSales.delete({ where: { id: input } });
