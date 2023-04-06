@@ -1,48 +1,49 @@
-import { useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { signIn, signOut } from "next-auth/react";
 
-import { api, type RouterOutputs } from "~/utils/api";
+import { api } from "~/utils/api";
 
-const PostCard: React.FC<{
-  post: RouterOutputs["post"]["all"][number];
-  onPostDelete?: () => void;
-}> = ({ post, onPostDelete }) => {
-  return (
-    <div className="flex flex-row rounded-lg bg-white/10 p-4 transition-all hover:scale-[101%]">
-      <div className="flex-grow">
-        <h1 className="text-2xl font-bold text-pink-400">{post.locationCode}</h1>
-        <p className="mt-2 text-sm"> Gross Sales: {post.grossSales}</p>
-        <p className="mt-2 text-sm"> Net Sales: {post.netSales}</p>
-      </div>
-      <div>
-        <span
-          className="cursor-pointer text-sm font-bold uppercase text-pink-400"
-          onClick={onPostDelete}
-        >
-          Delete
-        </span>
-      </div>
-    </div>
-  );
-};
+// type RouterOutputs
+
+// const PostCard: React.FC<{
+//   post: RouterOutputs["post"]["all"][number];
+//   onPostDelete?: () => void;
+// }> = ({ post, onPostDelete }) => {
+//   return (
+//     <div className="flex flex-row rounded-lg bg-white/10 p-4 transition-all hover:scale-[101%]">
+//       <div className="flex-grow">
+//         <h1 className="text-2xl font-bold text-pink-400">{post.locationCode}</h1>
+//         <p className="mt-2 text-sm"> Gross Sales: {post.grossSales}</p>
+//         <p className="mt-2 text-sm"> Net Sales: {post.netSales}</p>
+//       </div>
+//       <div>
+//         <span
+//           className="cursor-pointer text-sm font-bold uppercase text-pink-400"
+//           onClick={onPostDelete}
+//         >
+//           Delete
+//         </span>
+//       </div>
+//     </div>
+//   );
+// };
 
 const CreatePostForm: React.FC = () => {
-  const utils = api.useContext();
+  // const utils = api.useContext();
 
   // const [grossSles] = useState("");
   // const [content, setContent] = useState("");
   // const 
   
 
-  const { mutate, error } = api.post.create.useMutation({
-    async onSuccess() {
-      console.log('yawa')
-      // setTitle("");
-      // setContent("");
-      // await utils.post.all.invalidate();
-    },
+  const { mutate } = api.post.create.useMutation({
+    // async onSuccess() {
+    //   console.log('yawa')
+    //   // setTitle("");
+    //   // setContent("");
+    //   // await utils.post.all.invalidate();
+    // },
   });
 
   return (
@@ -94,11 +95,11 @@ const CreatePostForm: React.FC = () => {
 };
 
 const Home: NextPage = () => {
-  const postQuery = api.post.all.useQuery();
+  // const postQuery = api.post.all.useQuery();
 
-  const deletePostMutation = api.post.delete.useMutation({
-    onSettled: () => postQuery.refetch(),
-  });
+  // const deletePostMutation = api.post.delete.useMutation({
+  //   onSettled: () => postQuery.refetch(),
+  // });
 
   return (
     <>
@@ -116,7 +117,7 @@ const Home: NextPage = () => {
 
           <CreatePostForm />
 
-          {postQuery.data ? (
+          {/* {postQuery.data ? (
             <div className="w-full max-w-2xl">
               {postQuery.data?.length === 0 ? (
                 <span>There are no posts!</span>
@@ -138,7 +139,7 @@ const Home: NextPage = () => {
             </div>
           ) : (
             <p>Loading...</p>
-          )}
+          )} */}
         </div>
       </main>
     </>
