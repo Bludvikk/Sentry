@@ -18,9 +18,9 @@ const salesSchema = z.object({
 })
 
 
-export const postRouter = router({
+export const salesRouter = router({
   all: publicProcedure
-  .meta({ openapi: { method: 'GET', path: '/get'}})
+  .meta({ openapi: { method: 'GET', path: '/sales'}})
   .input( z.void())
   .output(z.object({sales: z.array(salesSchema)}))
 
@@ -62,7 +62,7 @@ export const postRouter = router({
       return ctx.prisma.viewSales.findFirst({ where: { id: input.id } });
     }),
   create: publicProcedure
-    .meta({ openapi: { method: 'POST', path: '/post'}})
+    .meta({ openapi: { method: 'POST', path: '/sales'}})
     .input(
       z.object({
         grossSales: z.number(),
