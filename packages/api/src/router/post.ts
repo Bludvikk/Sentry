@@ -20,13 +20,13 @@ const salesSchema = z.object({
 
 export const postRouter = router({
   all: publicProcedure
-  .meta({ openapi: { method: 'GET', path: '/post'}})
+  .meta({ openapi: { method: 'GET', path: '/get'}})
   .input( z.void())
   .output(z.object({sales: z.array(salesSchema)}))
-  //@ts-ignore
+
   .query( async ({ ctx }) => {
     // const result = await ctx.prisma.viewSales.findFirst()
-    const result = await ctx.prisma.viewSales.findMany  ()
+    const result = await ctx.prisma.viewSales.findMany()
 
     if (!result) {
       throw new TRPCError({message: 'Sales not found', code: 'NOT_FOUND'})
