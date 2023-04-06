@@ -11,6 +11,7 @@
     "clean:workspaces": "turbo clean",
     "db:generate": "turbo db:generate",
     "db:push": "turbo db:push db:generate",
+    "db:push-loss": "turbo db:push db:generate -- --accept-data-loss",
     "dev": "turbo dev --parallel",
     "format": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx,md,json}\" --ignore-path .gitignore",
     "lint": "turbo lint && manypkg check",
@@ -23,8 +24,11 @@
     "@manypkg/cli": "^0.20.0",
     "@types/prettier": "^2.7.2",
     "eslint": "^8.37.0",
+    "http": "^0.0.1-security",
     "prettier": "^2.8.7",
     "prettier-plugin-tailwindcss": "^0.2.6",
+    "superjson": "^1.12.2",
+    "trpc-openapi": "^1.1.2",
     "turbo": "^1.8.8",
     "typescript": "^5.0.3"
   }

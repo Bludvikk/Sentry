@@ -10,9 +10,11 @@ import { TRPCError, initTRPC } from "@trpc/server";
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import { z } from 'zod'
 
 import { getServerSession, type Session } from "@acme/auth";
 import { prisma } from "@acme/db";
+import { OpenApiMeta } from "trpc-openapi";
 
 /**
  * 1. CONTEXT
@@ -65,17 +67,13 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
  * This is where the trpc api is initialized, connecting the context and
  * transformer
  */
-const t = initTRPC.context<typeof createTRPCContext>().create({
+const t = initTRPC.context<typeof createTRPCContext>().meta<OpenApiMeta>().create({
   transformer: superjson,
-  errorFormatter({ shape, error }) {
-    return {
-      ...shape,
-      data: {
-        ...shape.data,
-        zodError:
-          error.cause instanceof ZodError ? error.cause.flatten() : null,
-      },
-    };
+  errorFormatter: ({ error, shape }) => {
+    if (error.code === 'INTERNAL_SERVER_ERROR' && process.env.NODE_ENV === 'production') {
+      return { ...shape, message: 'Internal server error' };
+    }
+    return shape;
   },
 });
 
@@ -90,7 +88,7 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
  * This is how you create new routers and subrouters in your tRPC API
  * @see https://trpc.io/docs/router
  */
-export const createTRPCRouter = t.router;
+// export const createTRPCRouter = t.router;
 
 /**
  * Public (unauthed) procedure
@@ -99,6 +97,8 @@ export const createTRPCRouter = t.router;
  * tRPC API. It does not guarantee that a user querying is authorized, but you
  * can still access user session data if they are logged in
  */
+export const router = t.router
+
 export const publicProcedure = t.procedure;
 
 /**
@@ -127,3 +127,4 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
  * @see https://trpc.io/docs/procedures
  */
 export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
+

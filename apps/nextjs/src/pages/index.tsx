@@ -12,8 +12,9 @@ const PostCard: React.FC<{
   return (
     <div className="flex flex-row rounded-lg bg-white/10 p-4 transition-all hover:scale-[101%]">
       <div className="flex-grow">
-        <h2 className="text-2xl font-bold text-pink-400">{post.title}</h2>
-        <p className="mt-2 text-sm">{post.content}</p>
+        <h1 className="text-2xl font-bold text-pink-400">{post.locationCode}</h1>
+        <p className="mt-2 text-sm"> Gross Sales: {post.grossSales}</p>
+        <p className="mt-2 text-sm"> Net Sales: {post.netSales}</p>
       </div>
       <div>
         <span
@@ -30,20 +31,23 @@ const PostCard: React.FC<{
 const CreatePostForm: React.FC = () => {
   const utils = api.useContext();
 
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  // const [grossSles] = useState("");
+  // const [content, setContent] = useState("");
+  // const 
+  
 
   const { mutate, error } = api.post.create.useMutation({
     async onSuccess() {
-      setTitle("");
-      setContent("");
-      await utils.post.all.invalidate();
+      console.log('yawa')
+      // setTitle("");
+      // setContent("");
+      // await utils.post.all.invalidate();
     },
   });
 
   return (
     <div className="flex w-full max-w-2xl flex-col p-4">
-      <input
+      {/* <input
         className="mb-2 rounded bg-white/10 p-2 text-white"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
@@ -64,13 +68,22 @@ const CreatePostForm: React.FC = () => {
         <span className="mb-2 text-red-500">
           {error.data.zodError.fieldErrors.content}
         </span>
-      )}
+      )} */}
       <button
         className="rounded bg-pink-400 p-2 font-bold"
         onClick={() => {
           mutate({
-            title,
-            content,
+            locationCode: 'Makati Branch - 1',
+            grossSales: 129761,
+            returnTotal: 35,
+            voidTotal: 0,
+            netSales: 126635,
+            payment: {
+              code: 'GCASH',
+              amount: 100000,
+            },
+            profitTotal: 100000,
+            tranDate: new Date('2023-03-24')
           });
         }}
       >
@@ -97,7 +110,7 @@ const Home: NextPage = () => {
       <main className="flex h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
         <div className="container mt-12 flex flex-col items-center justify-center gap-4 px-4 py-8">
           <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Create <span className="text-pink-400">T3</span> Turbo
+             <span className="text-pink-400">Sentry</span>
           </h1>
           <AuthShowcase />
 
