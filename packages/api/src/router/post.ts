@@ -4,7 +4,6 @@ import { z } from "zod";
 import { router, publicProcedure } from "../trpc";
 
 const salesSchema = z.object({
-  id: z.string(),
   grossSales: z.number(),
   locationCode: z.string(),
   netSales: z.number(),
@@ -19,15 +18,19 @@ const salesSchema = z.object({
 
 
 export const salesRouter = router({
-  all: publicProcedure
+  list: publicProcedure
   .meta({ openapi: { method: 'GET', path: '/sales'}})
-  .input( z.void())
+  .input( z.object({
+    name: z.string()
+  }))
   .output(z.object({sales: z.array(salesSchema)}))
 
   .query( async ({ ctx }) => {
+
+    console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ')
     // const result = await ctx.prisma.viewSales.findFirst()
     const result = await ctx.prisma.viewSales.findMany()
-
+    
     if (!result) {
       throw new TRPCError({message: 'Sales not found', code: 'NOT_FOUND'})
     }

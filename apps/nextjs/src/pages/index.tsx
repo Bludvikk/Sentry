@@ -4,6 +4,9 @@ import { signIn, signOut } from "next-auth/react";
 
 import { api } from "~/utils/api";
 
+
+
+
 // type RouterOutputs
 
 // const PostCard: React.FC<{
@@ -37,7 +40,7 @@ const CreatePostForm: React.FC = () => {
   // const 
   
 
-  const { mutate } = api.post.create.useMutation({
+  const { mutate } = api.sales.create.useMutation({
     // async onSuccess() {
     //   console.log('yawa')
     //   // setTitle("");
@@ -46,7 +49,10 @@ const CreatePostForm: React.FC = () => {
     // },
   });
 
+
+
   return (
+    
     <div className="flex w-full max-w-2xl flex-col p-4">
       {/* <input
         className="mb-2 rounded bg-white/10 p-2 text-white"
@@ -149,6 +155,7 @@ const Home: NextPage = () => {
 export default Home;
 
 const AuthShowcase: React.FC = () => {
+
   const { data: session } = api.auth.getSession.useQuery();
 
   const { data: secretMessage } = api.auth.getSecretMessage.useQuery(
