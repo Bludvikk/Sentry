@@ -17,9 +17,9 @@ const PostCard: React.FC<{
       <View className="flex-grow">
         <TouchableOpacity onPress={() => router.push(`/post/${post.id}`)}>
           <Text className="text-xl font-semibold text-pink-400">
-            {post.title}
+            {post.locationCode}
           </Text>
-          <Text className="mt-2 text-white">{post.content}</Text>
+          <Text className="mt-2 text-white">{post.grossSales}</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={onDelete}>
@@ -71,12 +71,17 @@ const CreatePost: React.FC = () => {
       )}
       <TouchableOpacity
         className="rounded bg-pink-400 p-2"
-        onPress={() => {
-          mutate({
-            title,
-            content,
-          });
-        }}
+        // onPress={() => {
+        //   mutate({
+        //     grossSales: 100,
+        //     locationCode: 'Makati',
+        //     netSales: 1000,
+        //     profitTotal: 1000,
+        //     returnTotal: 1000,
+        //     tranDate: new Date('2022-06-22'),
+        //     voidTotal: 1000
+        //   });
+        // }}
       >
         <Text className="font-semibold text-white">Publish post</Text>
       </TouchableOpacity>
