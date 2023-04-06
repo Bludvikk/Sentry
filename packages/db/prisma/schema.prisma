@@ -81,5 +81,5 @@ model ViewSales {
     returnTotal     Int
     tranDate        DateTime
     voidTotal       Int
-    payment         Json?
+    payment         Json
 }

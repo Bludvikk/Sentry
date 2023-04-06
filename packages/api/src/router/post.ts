@@ -23,6 +23,7 @@ export const postRouter = router({
   .meta({ openapi: { method: 'GET', path: '/post'}})
   .input( z.void())
   .output(z.object({sales: z.array(salesSchema)}))
+  //@ts-ignore
   .query( async ({ ctx }) => {
     // const result = await ctx.prisma.viewSales.findFirst()
     const result = await ctx.prisma.viewSales.findMany  ()
