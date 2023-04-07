@@ -3,7 +3,7 @@ import { api } from '~/utils/api'
 
 function sales() {
 
-    const { data: salesData } = api.sales.getAll.useQuery( { name: 'Adam'} )
+    const { data: salesData } = api.sales.list.useQuery()
     console.log(salesData?.sales)
     console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
   return (

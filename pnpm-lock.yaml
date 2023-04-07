@@ -40,6 +40,9 @@ importers:
       typescript:
         specifier: ^5.0.3
         version: 5.0.3
+      zod-prisma-types:
+        specifier: ^2.5.5
+        version: 2.5.5
 
   apps/expo:
     dependencies:
@@ -2512,6 +2515,16 @@ packages:
       prisma: 4.12.0
     dev: false
 
+  /@prisma/debug@4.12.0:
+    resolution: {integrity: sha512-mBTAGClWnxJpFSDSLF4+sVfVgS+KIs+y/Ncu3e+JkJ/gfJ1f591nRrclV1EmxnfTcvd8xoomhbiTy5mYDzzPEA==}
+    dependencies:
+      '@types/debug': 4.1.7
+      debug: 4.3.4
+      strip-ansi: 6.0.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@prisma/engines-version@4.12.0-67.659ef412370fa3b41cd7bf6e94587c1dfb7f67e7:
     resolution: {integrity: sha512-JIHNj5jlXb9mcaJwakM0vpgRYJIAurxTUqM0iX0tfEQA5XLZ9ONkIckkhuAKdAzocZ+80GYg7QSsfpjg7OxbOA==}
     dev: false
@@ -2519,6 +2532,17 @@ packages:
   /@prisma/engines@4.12.0:
     resolution: {integrity: sha512-0alKtnxhNB5hYU+ymESBlGI4b9XrGGSdv7Ud+8TE/fBNOEhIud0XQsAR+TrvUZgS4na5czubiMsODw0TUrgkIA==}
     requiresBuild: true
+
+  /@prisma/generator-helper@4.12.0:
+    resolution: {integrity: sha512-sB4dkjylb6tMrDZ3GMHPRDKSKOSP86e5yoOrWuJGa0W30LPeCnOzwyNtqUYYdgV/xuIcTS3TGAYSfryeyeU2JA==}
+    dependencies:
+      '@prisma/debug': 4.12.0
+      '@types/cross-spawn': 6.0.2
+      chalk: 4.1.2
+      cross-spawn: 7.0.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /@radix-ui/react-compose-refs@1.0.0(react@18.2.0):
     resolution: {integrity: sha512-0KaSv6sx787/hK3eF53iOkiSLwAGlFMx5lotrqD2pTjB18KbybKoEIgkNZTKC60YECDQTKGTRcDBILwZVqVKvA==}
@@ -2994,6 +3018,18 @@ packages:
       '@babel/types': 7.21.4
     dev: true
 
+  /@types/cross-spawn@6.0.2:
+    resolution: {integrity: sha512-KuwNhp3eza+Rhu8IFI5HUXRP0LIhqH5cAjubUvGXXthh4YYBuP2ntwEX+Cz8GJoZUHlKo247wPWOfA9LYEq4cw==}
+    dependencies:
+      '@types/node': 18.15.11
+    dev: false
+
+  /@types/debug@4.1.7:
+    resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
+    dependencies:
+      '@types/ms': 0.7.31
+    dev: false
+
   /@types/eslint@8.37.0:
     resolution: {integrity: sha512-Piet7dG2JBuDIfohBngQ3rCt7MgO9xCO4xIMKxBThCq5PNRB91IjlJ10eJVwfoNtvTErmxLzwBZ7rHZtbOMmFQ==}
     dependencies:
@@ -3037,6 +3073,10 @@ packages:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
       '@types/node': 18.15.11
+    dev: false
+
+  /@types/ms@0.7.31:
+    resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
     dev: false
 
   /@types/node@12.20.55:
@@ -4103,6 +4143,10 @@ packages:
       qs: 6.11.0
       raw-body: 2.5.1
       type-is: 1.6.18
+    dev: false
+
+  /code-block-writer@11.0.3:
+    resolution: {integrity: sha512-NiujjUFB4SwScJq2bwbYUtXbZhBSlY6vYzm++3Q6oC+U+injTqfPYFK8wS9COOmb2lueqp0ZRB4nK1VYeHgNyw==}
     dev: false
 
   /collection-visit@1.0.0:
@@ -10691,6 +10735,18 @@ packages:
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  /zod-prisma-types@2.5.5:
+    resolution: {integrity: sha512-U0jIALrs9B6cWdgm9mP/cWIlIeIpkXKVLFqprWEN+M3S8G1ykntfnJPJXH9n6kAXy/+W56xwKPP/useKaaV84g==}
+    hasBin: true
+    dependencies:
+      '@prisma/generator-helper': 4.12.0
+      code-block-writer: 11.0.3
+      lodash: 4.17.21
+      zod: 3.21.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /zod-to-json-schema@3.20.4(zod@3.21.4):
     resolution: {integrity: sha512-Un9+kInJ2Zt63n6Z7mLqBifzzPcOyX+b+Exuzf7L1+xqck9Q2EPByyTRduV3kmSPaXaRer1JCsucubpgL1fipg==}

@@ -1,27 +1,14 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import { ViewSalesSchema } from "../../../db/prisma/generated/zod";
 
 import { router, publicProcedure } from "../trpc";
-
-const salesSchema = z.object({
-  grossSales: z.number(),
-  locationCode: z.string(),
-  netSales: z.number(),
-  profitTotal: z.number(),
-  returnTotal: z.number(),
-  voidTotal: z.number(),
-  tranDate: z.date(),
-  payment: z.object({
-    code: z.string().default('N/A'),
-    amount: z.number().default(0)})
-})
-
 
 export const salesRouter = router({
   list: publicProcedure
   .meta({ openapi: { method: 'GET', path: '/sales'}})
   .input( z.void())
-  .output(z.object({sales: z.array(salesSchema)}))
+  .output(z.object({sales: z.array(ViewSalesSchema)}))
 
   .query( async ({ ctx }) => {
 
@@ -36,25 +23,6 @@ export const salesRouter = router({
 
     return {sales: result}
 
-    // const {  id, grossSales, locationCode, netSales, profitTotal, voidTotal, returnTotal, tranDate, payment  } = result
-    
-    // return {id, grossSales, locationCode, netSales, profitTotal, returnTotal, voidTotal, tranDate, payment}
-    
-    
-    // return { grossSales: result ? result.grossSales : 0}
-//     return {
-//       grossSales: 13212,
-//       // locationCode: "Quezon City",
-//       // netSales: 1312310,
-//       // profitTotal: 2312310,
-//       // returnTotal: 1123120,
-//       // tranDate: "2023-03-24T00:00:00.000Z",
-//       // voidTotal: 11231230,
-//       // payment: {
-//       //   code: "Gcash",
-//       //   amount: 10021321312300
-//       // }
-// }
   }),
   byId: publicProcedure
     .input(z.object({ id: z.string() }))
@@ -64,7 +32,7 @@ export const salesRouter = router({
   create: publicProcedure
     .meta({ openapi: { method: 'POST', path: '/sales'}})
     .input(
-     salesSchema
+      ViewSalesSchema
     ).output(
       z.object({
         message: z.string()
