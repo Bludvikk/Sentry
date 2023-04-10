@@ -56,16 +56,4 @@ export const salesRouter = router({
         });
       }
     }),
-    listByID: publicProcedure
-    .output(z.array(SalesSchema) )
-    .query(async ({ ctx }) => {
-      const sales = await ctx.prisma.sales.findUnique();
-
-      if (!sales) {
-        throw new TRPCError({ message: "Sales not found", code: "NOT_FOUND" });
-      }
-
-      return sales;
-    }),
-  
 });

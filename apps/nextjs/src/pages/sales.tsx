@@ -1,5 +1,7 @@
-import React from 'react'
+import Link from 'next/link'
+import React, { useState } from 'react'
 import { api } from '~/utils/api'
+
 
 function sales() {
 
@@ -10,13 +12,10 @@ function sales() {
     {salesData && salesData.map( row => {
         console.log(typeof row.grossAmount, row.grossAmount)
       })}
-  return (
-    
-    <div>sales
-
-
-    </div>
-  )
+      return (
+        <div>
+          sales
+        </div>
+      );
 }
-
 export default sales
