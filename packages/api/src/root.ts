@@ -1,5 +1,5 @@
 import { authRouter } from "./router/auth";
-import { salesRouter } from "./router/post";
+import { salesRouter } from "./router/sales";
 import { router } from "./trpc";
 
 

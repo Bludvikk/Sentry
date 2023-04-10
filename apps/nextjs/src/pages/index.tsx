@@ -40,7 +40,7 @@ const CreatePostForm: React.FC = () => {
   // const 
   
 
-  const { mutate } = api.sales.create.useMutation({
+  const { mutate } = api.sales.post.useMutation({
     // async onSuccess() {
     //   console.log('yawa')
     //   // setTitle("");
@@ -78,21 +78,9 @@ const CreatePostForm: React.FC = () => {
       )} */}
       <button
         className="rounded bg-pink-400 p-2 font-bold"
-        onClick={() => {
-          mutate({
-            locationCode: 'Makati Branch - 1',
-            grossSales: 129761,
-            returnTotal: 35,
-            voidTotal: 0,
-            netSales: 126635,
-            payment: {
-              code: 'GCASH',
-              amount: 100000,
-            },
-            profitTotal: 100000,
-            tranDate: new Date('2023-03-24')
-          });
-        }}
+        // onClick={() => {
+        //   // mutate({});
+        // }}
       >
         Create
       </button>
