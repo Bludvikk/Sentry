@@ -1,36 +1,27 @@
 generator client {
   provider = "prisma-client-js"
 }
+
+generator zod {
+  provider = "zod-prisma-types"
+}
+
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
-generator zod {
-  provider       = "zod-prisma-types"
-}
-
-
 model Sales {
-    id              String @id @default(cuid())
-    grossSales      Int
-    locationCode    String
-    netSales        Int
-    profitTotal     Int
-    returnTotal     Int
-    tranDate        DateTime
-    voidTotal       Int
-    payment         Json?
-}
-model ViewSales {
-    id              String @id @default(cuid())
-    grossSales      Int
-    locationCode    String
-    netSales        Int
-    profitTotal     Int
-    returnTotal     Int
-    tranDate        DateTime
-    voidTotal       Int
-    payment         Json?
+  id             Int      @id @default(autoincrement())
+  businessCode   String   @db.VarChar(10)
+  locationCode   String   @db.VarChar(50)
+  tranDate       DateTime @db.Date
+  grossAmount    Decimal? @db.Decimal(18, 5)
+  returnAmount   Decimal? @db.Decimal(18, 5)
+  voidAmount     Decimal? @db.Decimal(18, 5)
+  discountAmount Decimal? @db.Decimal(18, 5)
+  netAmount      Decimal? @db.Decimal(18, 5)
+  payments       Json?
+  details        Json?
 }
